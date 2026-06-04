@@ -8,6 +8,14 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
 llvm.toolchain(
     llvm_version = "20.1.8",
+    # Use the host libstdc++ for both compilation and linking. The prebuilt
+    # LLVM 20.1.8 distribution's bundled libc++ headers are not picked up on
+    # this host (Ubuntu 25.10 / GCC 15), so compilation falls back to the
+    # system libstdc++ headers (which reference std::__glibcxx_assert_fail due
+    # to Ubuntu's default _GLIBCXX_ASSERTIONS=1) while the default
+    # "builtin-libc++" links libc++.a -> undefined symbol at link time.
+    # Selecting "stdc++" keeps headers and the linked C++ runtime consistent.
+    stdlib = {"": "stdc++"},
 )
 use_repo(llvm, "llvm_toolchain")
 
