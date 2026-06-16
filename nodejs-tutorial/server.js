@@ -26,6 +26,12 @@ const express = require('express');
 // Instantiate the Express application that will host the route handlers.
 const app = express();
 
+// Security hardening: disable Express's default "X-Powered-By: Express"
+// response header. Advertising the framework provides no functional benefit
+// and needlessly fingerprints the server for potential attackers. This is a
+// header-only change — it does not alter any response body (constraint C2).
+app.disable('x-powered-by');
+
 // Resolve the listening port: honor process.env.PORT when provided, otherwise
 // fall back to the conventional development default of 3000.
 const PORT = process.env.PORT || 3000;
