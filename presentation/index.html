@@ -25,10 +25,12 @@
     (R-CDN-VERSION).
     ===========================================================================
   -->
-  <!-- 1) Reveal core stylesheet -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.css">
+  <!-- 1) Reveal core stylesheet
+       SRI: integrity (SHA-384) + crossorigin pin the exact @6.0.1 bytes so a
+       tampered/substituted CDN response is rejected by the browser. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.css" integrity="sha384-dhfF1Ci6NpmiNpkwXoCmf3rzDo6Q7FoEQlBl5iFSMAut+n2FBkvySirs0e8K80uB" crossorigin="anonymous">
   <!-- 2) Reveal base theme (dark) — overridden by the local theme below -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/theme/black.css" id="theme" integrity="sha384-Em7yfqLWKCWr6J902VXpdZl9SmRoIT9wi3ldpTDhxtq6UXkWI3Uq7SF7Pvbt9aQ1" crossorigin="anonymous">
   <!-- 3) Local derived executive theme — MUST remain the LAST stylesheet -->
   <link rel="stylesheet" href="./assets/theme.css">
 </head>
@@ -212,8 +214,8 @@ GET /good-evening &rarr; Good evening</code></pre>
     asset is "dist/plugin/notes.js" — it keeps the required "dist/" + "plugin/"
     segments and stays pinned at @6.0.1, so all CDN rules still hold.
   -->
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js" integrity="sha384-YDU211R6fuqmK15oKLX9VJCGg/SthKKkY+PNdIqe67VRT/6dQv0stDlvWXTnkt5B" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js" integrity="sha384-5TkYlQby2b3iWhNqIByRON2WeiVTb8lFRJQwP9guRxc8m2iaBxBXnYfbaHTeefTE" crossorigin="anonymous"></script>
   <script>
     // Single initialization. RevealNotes is REQUIRED so the speaker-notes view
     // (press "S") works. hash:true gives deep-linkable per-slide URLs;
