@@ -66,5 +66,5 @@ abc.history
 
 bazel-*
 
-# Node.js dependencies (nodejs-tutorial/)
+# Node.js tutorial dependencies (installed under nodejs-tutorial/)
 node_modules/
