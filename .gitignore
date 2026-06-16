@@ -65,3 +65,6 @@ tags
 abc.history
 
 bazel-*
+
+# Node.js dependencies (nodejs-tutorial/)
+node_modules/
