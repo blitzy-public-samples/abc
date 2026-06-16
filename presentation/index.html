@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Executive briefing on the Node.js + Express tutorial service added to the Berkeley ABC repository (endpoints: Hello world and Good evening).">
+  <title>ABC &mdash; Node.js + Express Tutorial: Executive Briefing</title>
+
+  <!--
+    ===========================================================================
+    Reveal.js 6.0.1 is delivered EXCLUSIVELY from CDN (no build step / no npm
+    dependency for the deck itself).
+
+    CRITICAL stylesheet load order (do NOT reorder):
+      1) Reveal core stylesheet        (dist/reveal.css)
+      2) Reveal base theme "black"     (dist/theme/black.css, id="theme")
+      3) Local derived executive theme (./assets/theme.css)  <-- MUST be LAST
+
+    The local override (3) is intentionally last so its derived-ABC tokens win
+    the cascade over the base theme (R-OVERRIDE-LAST). Reveal 6.0 dropped the
+    "dist/" prefix from its npm export map, but CDN asset paths STILL use
+    "dist/" (and "plugin/" for plugins) — these segments are retained on every
+    URL below (R-DIST-PREFIX). Every URL pins exactly reveal.js@6.0.1
+    (R-CDN-VERSION).
+    ===========================================================================
+  -->
+  <!-- 1) Reveal core stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.css">
+  <!-- 2) Reveal base theme (dark) — overridden by the local theme below -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/theme/black.css" id="theme">
+  <!-- 3) Local derived executive theme — MUST remain the LAST stylesheet -->
+  <link rel="stylesheet" href="./assets/theme.css">
+</head>
+<body>
+  <!--
+    ===========================================================================
+    Reveal.js root. Only NATIVE Reveal constructs are used (R-NATIVE-ONLY):
+      <section>             one horizontal (top-level) slide
+      nested <section>      vertical drill-down stack (see Slide 5)
+      class="fragment"      step-by-step reveal of a point
+      data-background-color per-slide background drawn from the theme palette
+      <aside class="notes"> speaker notes (RevealNotes plugin; press "S")
+
+    Themeable hooks consumed by ./assets/theme.css (no CSS is authored here):
+      <h1>                          -> California Gold title
+      <h2> / <h3>                   -> monospace headings (natural casing)
+      <pre class="terminal"><code>  -> dark terminal panel, Berkeley-blue
+                                       border + California-gold left accent
+      <span class="brand-accent"> / <strong> -> California Gold inline emphasis
+      <code>                        -> monospace inline code
+    The deck's ONLY local dependency is ./assets/theme.css; its ONLY outbound
+    dependencies are the reveal.js@6.0.1 CDN assets (R-SELF-CONTAINED).
+    ===========================================================================
+  -->
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- ==================================================================
+           Slide 1 — Title
+           Initiative headline + ABC project context (verbatim, README.md L5)
+           + UC Berkeley attribution (provenance: copyright.txt L6).
+           =============================================================== -->
+      <section data-background-color="#1a1a1a">
+        <h1>Node.js + Express Tutorial Service</h1>
+        <h3>Executive Briefing</h3>
+        <!-- Project context line, verbatim from README.md L5 -->
+        <p><span class="brand-accent">ABC: System for Sequential Logic Synthesis and Formal Verification</span></p>
+        <!-- Attribution provenance: copyright.txt L6 -->
+        <p><small>The Regents of the University of California &middot; UC Berkeley</small></p>
+        <aside class="notes">
+          Welcome. This is a short, five-minute briefing on a new Node.js teaching service we added to
+          the ABC repository. It is intentionally small and is fully isolated from the ABC EDA
+          toolchain. I will cover what it is, what changed, why it matters, and the risk posture.
+        </aside>
+      </section>
+
+      <!-- ==================================================================
+           Slide 2 — Context
+           What the tutorial service is and why it exists.
+           =============================================================== -->
+      <section>
+        <h2>Context</h2>
+        <ul>
+          <li class="fragment">A small, framework-based <strong>HTTP server</strong> added as a teaching and example artifact.</li>
+          <li class="fragment">Built on <strong>Node.js</strong>, the standard server-side JavaScript runtime.</li>
+          <li class="fragment">Self-contained in its own <strong>nodejs-tutorial/</strong> directory.</li>
+          <li class="fragment">Completely independent of the <strong>ABC EDA core</strong> &mdash; it shares no code or build path.</li>
+        </ul>
+        <aside class="notes">
+          The goal here is education and demonstration, not production EDA work. It gives newcomers a
+          minimal, modern HTTP service they can read end to end, and it never touches the C/C++ engine.
+        </aside>
+      </section>
+
+      <!-- ==================================================================
+           Slide 3 — What changed
+           Express.js adoption + the two GET endpoints, shown in a
+           terminal-styled block echoing the README.md L46-61 "abc 01>"
+           session. Endpoint payloads are VERBATIM (R-VERBATIM-STRINGS).
+           =============================================================== -->
+      <section>
+        <h2>What Changed</h2>
+        <p>We adopted the industry-standard <strong>Express.js</strong> framework (<code>express@5.2.1</code>) and exposed two GET endpoints.</p>
+        <pre class="terminal"><code>UC Berkeley, ABC 1.01
+abc 01&gt; npm start
+  Server listening on http://localhost:3000
+
+GET /             &rarr; Hello world
+GET /good-evening &rarr; Good evening</code></pre>
+        <aside class="notes">
+          Two routes only. The root path returns Hello world; a second route returns Good evening.
+          Express gives us clean, declarative routing, so adding more endpoints later is trivial.
+        </aside>
+      </section>
+
+      <!-- ==================================================================
+           Slide 4 — Why it matters
+           Business value of adopting Express.
+           =============================================================== -->
+      <section>
+        <h2>Why It Matters</h2>
+        <ul>
+          <li class="fragment"><strong>Maintainable routing</strong> &mdash; each endpoint is a clear, declarative one-liner.</li>
+          <li class="fragment"><strong>Easy extensibility</strong> &mdash; new endpoints are added with minimal code.</li>
+          <li class="fragment"><strong>Industry-standard framework</strong> &mdash; Express is widely adopted and well supported.</li>
+          <li class="fragment"><strong>Lower cost</strong> &mdash; familiar tooling reduces onboarding and maintenance overhead.</li>
+        </ul>
+        <aside class="notes">
+          The business value is speed and familiarity. Most engineers already know Express, so the
+          learning curve is near zero and long-term maintenance stays inexpensive.
+        </aside>
+      </section>
+
+      <!-- ==================================================================
+           Slide 5 — Risk & isolation  (vertical stack)
+           Top-level <section> wraps TWO nested vertical <section> slides:
+             5a) isolation summary (Berkeley-Blue backdrop)
+             5b) isolation detail drill-down (appendix)
+           This keeps SIX top-level slides while offering an optional
+           down-arrow appendix.
+           =============================================================== -->
+      <section>
+        <!-- 5a — isolation summary -->
+        <section data-background-color="#003262">
+          <h2>Risk &amp; Isolation</h2>
+          <ul>
+            <li class="fragment">New code is <strong>fully isolated</strong> from the C/C++ EDA toolchain.</li>
+            <li class="fragment">It sits <strong>outside</strong> the Bazel / CMake / GNU-Make <code>src/**</code> discovery.</li>
+            <li class="fragment">It is kept out of the git-ignored <code>docs/</code> and <code>build/</code> paths.</li>
+            <li class="fragment"><strong>No impact</strong> on the existing build or CI.</li>
+          </ul>
+          <p><small>Press &darr; for isolation detail</small></p>
+          <aside class="notes">
+            Risk is low by construction. The new files live in their own directories that no ABC build
+            system scans, so nothing about the existing toolchain or CI changes. Press down for detail.
+          </aside>
+        </section>
+        <!-- 5b — isolation detail (appendix drill-down) -->
+        <section>
+          <h3>Isolation Detail</h3>
+          <ul>
+            <li><strong>Bazel</strong> &mdash; source globs are scoped to <code>src/**</code>; new directories are not matched.</li>
+            <li><strong>CMake</strong> &mdash; discovery is rooted at <code>src/</code>; new directories are invisible to it.</li>
+            <li><strong>GNU Make</strong> &mdash; modules are discovered under <code>src/</code>; nothing new is picked up.</li>
+            <li>The only repository touchpoint is a one-line <code>.gitignore</code> rule for <code>node_modules/</code>.</li>
+          </ul>
+          <aside class="notes">
+            For the technically curious: each of the three build systems discovers sources only under
+            src. The single shared change is ignoring node_modules so dependencies are never committed.
+          </aside>
+        </section>
+      </section>
+
+      <!-- ==================================================================
+           Slide 6 — Status & next steps
+           Current state + follow-ups, and the REQUIRED repository-discrepancy
+           clarification (AAP §0.1, constraint C1).
+           =============================================================== -->
+      <section>
+        <h2>Status &amp; Next Steps</h2>
+        <ul>
+          <li class="fragment">The server runs locally via <code>npm start</code>; both endpoints are live.</li>
+          <li class="fragment">Recommended: add automated tests and a CI workflow for the tutorial.</li>
+          <li class="fragment">Optional: vendor Reveal.js for fully offline distribution of this deck.</li>
+        </ul>
+        <!-- Repository-discrepancy clarification — REQUIRED (AAP §0.1, constraint C1) -->
+        <p class="fragment"><strong>Clarification required:</strong> the original request assumed a pre-existing
+          Node.js &ldquo;Hello world&rdquo; server, but the connected repository is the Berkeley
+          <span class="brand-accent">ABC</span> C/C++ EDA toolkit. The server was therefore
+          <strong>created</strong>, not modified &mdash; please confirm this was the intended repository.</p>
+        <aside class="notes">
+          Closing point and one open question: this repository is the Berkeley ABC C/C++ toolkit, not a
+          Node.js server, so we created the service from scratch rather than modifying an existing one.
+          Please confirm we targeted the right repository before any further work proceeds.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <!--
+    Reveal.js 6.0.1 core script + Notes plugin, CDN-pinned, with the "dist/" and
+    "plugin/" path segments retained (R-DIST-PREFIX). These are the deck's only
+    outbound dependencies.
+
+    NOTE on the notes-plugin path: reveal.js 6.0 (Vite build) FLATTENED its
+    browser plugins to "dist/plugin/<name>.js". The legacy 5.x location
+    "plugin/notes/notes.js" returns HTTP 404 on @6.0.1 (verified against the
+    jsDelivr CDN), which would leave the RevealNotes global undefined and make
+    Reveal.initialize({ plugins: [ RevealNotes ] }) throw. The correct 6.0.1
+    asset is "dist/plugin/notes.js" — it keeps the required "dist/" + "plugin/"
+    segments and stays pinned at @6.0.1, so all CDN rules still hold.
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
+  <script>
+    // Single initialization. RevealNotes is REQUIRED so the speaker-notes view
+    // (press "S") works. hash:true gives deep-linkable per-slide URLs;
+    // slideNumber:true shows slide numbers — a useful executive touch.
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      plugins: [ RevealNotes ]
+    });
+  </script>
+</body>
+</html>

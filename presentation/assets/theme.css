@@ -196,3 +196,38 @@
   color: var(--r-selection-color);
   text-shadow: none;
 }
+
+/* -----------------------------------------------------------------------------
+ * Section 9 — Type scale & fit.
+ * Reveal.js lays each slide out in a fixed logical box (default 960x700) and
+ * uniformly scales that box to the viewport; it does NOT reflow or shrink
+ * oversized content to fit. The black.css base theme ships a large type scale
+ * (--r-main-font-size 42px; h1 2.5em -> 105px), which made the long monospace
+ * title wrap to four lines and pushed content past the 700px logical height —
+ * the title slide and the densest content slides clipped at the bottom edge
+ * (confirmed during Chrome DevTools runtime validation of index.html).
+ *
+ * This section establishes a coherent, slightly smaller executive type scale so
+ * every slide — including the Slide 5 vertical stack and the Slide 6 status +
+ * clarification slide — fits comfortably inside the logical slide height while
+ * remaining highly legible on large displays (the logical sizes are scaled UP
+ * to the viewport at render time). Headings keep their Section 4 monospace
+ * family, color, and spacing; only their size is set here.
+ * -------------------------------------------------------------------------- */
+:root {
+  /* Down from black.css's 42px so the densest slides fit the 700px logical box.
+   * This is the em base for the heading sizes below and for body copy. */
+  --r-main-font-size: 30px;
+}
+
+.reveal h1 {
+  font-size: 2em;    /* 60px — long monospace title fits two lines, no clipping */
+}
+
+.reveal h2 {
+  font-size: 1.4em;  /* 42px — per-slide headings */
+}
+
+.reveal h3 {
+  font-size: 1.15em; /* ~35px — subtitle and nested-slide headings */
+}
