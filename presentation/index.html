@@ -43,8 +43,11 @@
   <!--
     ===========================================================================
     Reveal.js root. Only NATIVE Reveal constructs are used (R-NATIVE-ONLY):
-      <section>             one horizontal (top-level) slide
-      nested <section>      vertical drill-down stack (see Slide 5)
+      <section>             one horizontal (top-level) slide (SIX total — the
+                            deck is intentionally flat so Reveal.getTotalSlides()
+                            returns exactly 6, per the six-slide executive flow
+                            in AAP §0.6.3; nested vertical sections are an
+                            optional construct per AAP §0.5.2 and are not used)
       class="fragment"      step-by-step reveal of a point
       data-background-color per-slide background drawn from the theme palette
       <aside class="notes"> speaker notes (RevealNotes plugin; press "S")
@@ -145,43 +148,32 @@ GET /good-evening &rarr; Good evening</code></pre>
       </section>
 
       <!-- ==================================================================
-           Slide 5 — Risk & isolation  (vertical stack)
-           Top-level <section> wraps TWO nested vertical <section> slides:
-             5a) isolation summary (Berkeley-Blue backdrop)
-             5b) isolation detail drill-down (appendix)
-           This keeps SIX top-level slides while offering an optional
-           down-arrow appendix.
+           Slide 5 — Risk & isolation
+           A SINGLE top-level slide on a Berkeley-Blue backdrop (#003262, the
+           --accent token, AAP §0.5.3). The former optional vertical "isolation
+           detail" drill-down was folded into the speaker notes below so the deck
+           stays at exactly SIX navigable slides (Reveal.getTotalSlides() === 6)
+           per the six-slide executive flow (AAP §0.6.3); nested vertical
+           sections are an optional construct (AAP §0.5.2) and are intentionally
+           not used here.
            =============================================================== -->
-      <section>
-        <!-- 5a — isolation summary -->
-        <section data-background-color="#003262">
-          <h2>Risk &amp; Isolation</h2>
-          <ul>
-            <li class="fragment">New code is <strong>fully isolated</strong> from the C/C++ EDA toolchain.</li>
-            <li class="fragment">It sits <strong>outside</strong> the Bazel / CMake / GNU-Make <code>src/**</code> discovery.</li>
-            <li class="fragment">It is kept out of the git-ignored <code>docs/</code> and <code>build/</code> paths.</li>
-            <li class="fragment"><strong>No impact</strong> on the existing build or CI.</li>
-          </ul>
-          <p><small>Press &darr; for isolation detail</small></p>
-          <aside class="notes">
-            Risk is low by construction. The new files live in their own directories that no ABC build
-            system scans, so nothing about the existing toolchain or CI changes. Press down for detail.
-          </aside>
-        </section>
-        <!-- 5b — isolation detail (appendix drill-down) -->
-        <section>
-          <h3>Isolation Detail</h3>
-          <ul>
-            <li><strong>Bazel</strong> &mdash; source globs are scoped to <code>src/**</code>; new directories are not matched.</li>
-            <li><strong>CMake</strong> &mdash; discovery is rooted at <code>src/</code>; new directories are invisible to it.</li>
-            <li><strong>GNU Make</strong> &mdash; modules are discovered under <code>src/</code>; nothing new is picked up.</li>
-            <li>The only repository touchpoint is a one-line <code>.gitignore</code> rule for <code>node_modules/</code>.</li>
-          </ul>
-          <aside class="notes">
-            For the technically curious: each of the three build systems discovers sources only under
-            src. The single shared change is ignoring node_modules so dependencies are never committed.
-          </aside>
-        </section>
+      <section data-background-color="#003262">
+        <h2>Risk &amp; Isolation</h2>
+        <ul>
+          <li class="fragment">New code is <strong>fully isolated</strong> from the C/C++ EDA toolchain.</li>
+          <li class="fragment">It sits <strong>outside</strong> the Bazel / CMake / GNU-Make <code>src/**</code> discovery.</li>
+          <li class="fragment">It is kept out of the git-ignored <code>docs/</code> and <code>build/</code> paths.</li>
+          <li class="fragment"><strong>No impact</strong> on the existing build or CI.</li>
+        </ul>
+        <aside class="notes">
+          Risk is low by construction. The new files live in their own directories that no ABC build
+          system scans, so nothing about the existing toolchain or CI changes.
+          For the technically curious, here is the isolation detail: Bazel source globs are scoped to
+          src/**, so the new directories are not matched; CMake discovery is rooted at src/, so the new
+          directories are invisible to it; and GNU Make discovers its modules under src/, so nothing new
+          is picked up. The only repository touchpoint is a one-line .gitignore rule for node_modules,
+          so the installed dependencies are never committed.
+        </aside>
       </section>
 
       <!-- ==================================================================

@@ -265,8 +265,8 @@
  * (confirmed during Chrome DevTools runtime validation of index.html).
  *
  * This section establishes a coherent, slightly smaller executive type scale so
- * every slide — including the Slide 5 vertical stack and the Slide 6 status +
- * clarification slide — fits comfortably inside the logical slide height while
+ * every slide — including the Slide 5 risk & isolation slide and the Slide 6
+ * status + clarification slide — fits comfortably inside the logical slide height while
  * remaining highly legible on large displays (the logical sizes are scaled UP
  * to the viewport at render time). Headings keep their Section 4 monospace
  * family, color, and spacing; only their size is set here.
@@ -281,7 +281,7 @@
    *   --r-main-font-size  30px  = 24px * 1.25  (body copy + em base)
    *   --font-size-h1      60px  = base * 2      (title — two lines, no clipping)
    *   --font-size-h2      42px  = base * 1.4    (per-slide headings)
-   *   --font-size-h3    ~34.5px = base * 1.15   (subtitles + nested-slide heads) */
+   *   --font-size-h3    ~34.5px = base * 1.15   (subtitle / drill-down heading scale) */
   --r-main-font-size: calc(var(--spacing-unit) * 1.25);
   --font-size-h1: calc(var(--r-main-font-size) * 2);
   --font-size-h2: calc(var(--r-main-font-size) * 1.4);

@@ -49,6 +49,24 @@ app.get('/good-evening', (req, res) => {
   res.send('Good evening');
 });
 
+// Security hardening: terminal catch-all 404 handler.
+// Without this, Express's default finalhandler answers any unmatched request
+// with an HTML body that echoes the requested path (e.g. "Cannot GET /<path>").
+// That default leaks no stack trace, filesystem path, or file contents, but
+// reflecting the raw request path back to the client is undesirable hardening
+// practice. This terminal middleware — which MUST stay AFTER both GET routes and
+// BEFORE app.listen() — replaces that behavior with a fixed, path-free plaintext
+// "Not Found" response for every HTTP method and route that did not match an
+// endpoint above. It deliberately never reads or echoes req.path / req.url, so
+// encoded injection probes and path-traversal attempts are not reflected. It
+// adds NO new content route (the public API surface stays exactly GET / and
+// GET /good-evening) and does not alter either endpoint's response (constraint
+// C2): requests to "/" and "/good-evening" still match the handlers above and
+// never reach this fallback.
+app.use((req, res) => {
+  res.status(404).type('text/plain').send('Not Found');
+});
+
 // Start the HTTP server and log the listening URL for tutorial clarity.
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
