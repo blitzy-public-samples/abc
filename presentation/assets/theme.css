@@ -170,6 +170,15 @@
  * -------------------------------------------------------------------------- */
 .reveal pre,
 .reveal .terminal {
+  /* box-sizing: border-box makes the width:100% below INCLUDE the horizontal
+   * padding and the 1px/4px borders, so the panel's border-box equals the 960px
+   * logical <section> width instead of overflowing it by 53px (= 48px padding +
+   * 5px borders) under the inherited content-box model. Without this, the
+   * over-constrained block resolves margin-right to -53px, which hides the
+   * document scrollbar but still paints the right blue border / top-right corner
+   * off the slide edge (QA F-1). With border-box the panel is fully contained at
+   * every breakpoint and the gold left accent + blue top/right borders all show. */
+  box-sizing: border-box;
   font-family: var(--r-code-font);
   background: var(--r-background-color);
   color: var(--r-main-color);
@@ -213,6 +222,24 @@
 .reveal .controls,
 .reveal .controls .controls-arrow {
   color: var(--highlight);
+}
+
+/* Keyboard focus indicator for the navigation controls (WCAG 2.4.7 Focus
+ * Visible). Reveal's base theme sets the control arrows to outline:none and a
+ * resting opacity of 0.3, so a Tab-focused arrow is otherwise imperceptible.
+ * On keyboard focus only (:focus-visible — pointer clicks are unaffected) we
+ * draw a 2px California-gold ring and lift the arrow to full opacity so the
+ * focused control is clearly visible on both the dark (#1a1a1a) and the
+ * Berkeley-blue (#003262) slide surfaces. The selector covers Reveal's <button>
+ * controls and the .controls-arrow elements; this file loads last so it wins. */
+.reveal .controls button:focus-visible,
+.reveal .controls .controls-arrow:focus-visible {
+  /* 2px ring + 2px offset, both anchored to --spacing-unit (24px / 12 = 2px) so
+   * no standalone literal is introduced (same token-backed calc pattern as the
+   * rest of this file). 2px is the conventional, clearly-visible focus width. */
+  outline: calc(var(--spacing-unit) / 12) solid var(--highlight);
+  outline-offset: calc(var(--spacing-unit) / 12);
+  opacity: 1;
 }
 
 .reveal ::selection {

@@ -6,6 +6,11 @@
   <meta name="description"
         content="Executive briefing on the Node.js + Express tutorial service added to the Berkeley ABC repository (endpoints: Hello world and Good evening).">
   <title>ABC &mdash; Node.js + Express Tutorial: Executive Briefing</title>
+  <!-- Inline empty-data favicon. Browsers auto-request /favicon.ico and log a
+       one-time 404 to the console when none is declared; this no-op icon
+       suppresses that request (and the 404) with zero extra network round-trips
+       and no visual impact, keeping the console clean (QA INFO-1). -->
+  <link rel="icon" href="data:,">
 
   <!--
     ===========================================================================
@@ -65,7 +70,12 @@
            =============================================================== -->
       <section data-background-color="#1a1a1a">
         <h1>Node.js + Express Tutorial Service</h1>
-        <h3>Executive Briefing</h3>
+        <!-- Slide subtitle is <h2> (not <h3>) so the page heading order descends
+             sequentially h1 -> h2 with no skipped level (QA F-3 / Lighthouse
+             heading-order). The theme styles h1-h4 with the same monospace family
+             and color; h2 (42px) stays below the h1 (60px) title, preserving the
+             title > subtitle visual hierarchy. -->
+        <h2>Executive Briefing</h2>
         <!-- Project context line, verbatim from README.md L5 -->
         <p><span class="brand-accent">ABC: System for Sequential Logic Synthesis and Formal Verification</span></p>
         <!-- Attribution provenance: copyright.txt L6 -->
